@@ -18,7 +18,7 @@ class UniformRandom:
 
 class Xavier:
 
-    def initialize(self, weights_shape, fan_in, fan_out):
+     def initialize(self, weights_shape, fan_in, fan_out):
         mu=np.sqrt(2/(fan_in + fan_out))
 
         return np.random.normal(loc=0, scale=mu, size=weights_shape)
