@@ -33,9 +33,9 @@ class Adam:
             self.momentum_one =np.zeros_like(weight_tensor)
             self.momentum_two=np.zeros_like(weight_tensor)
         self.momentum_one=(self.mu*self.momentum_one)+((1-self.mu)*gradient_tensor)
-        self.momentum_two=(self.rho*self.momentum_two)+((1-self.rho)*gradient_tensor**2
+        self.momentum_two=(self.rho*self.momentum_two)+(1-self.rho)*gradient_tensor**2
 
-        return weight_tensor- lr*(self.momentum_one/(np.sqrt(self.momentum_two)+1e-8))
+        return weight_tensor- self.lr*(self.momentum_one/(np.sqrt(self.momentum_two)+1e-8))
 
 
 
