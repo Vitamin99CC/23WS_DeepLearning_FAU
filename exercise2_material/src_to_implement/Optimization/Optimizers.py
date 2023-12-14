@@ -27,15 +27,17 @@ class Adam:
         self.rho = rho
         self.momentum_one=None
         self.momentum_two=None
+        self.k=0
     def calculate_update(self, weight_tensor, gradient_tensor):
-
+        self.k+=1
         if self.momentum_one is None:
             self.momentum_one =np.zeros_like(weight_tensor)
             self.momentum_two=np.zeros_like(weight_tensor)
         self.momentum_one=(self.mu*self.momentum_one)+((1-self.mu)*gradient_tensor)
         self.momentum_two=(self.rho*self.momentum_two)+(1-self.rho)*gradient_tensor**2
-
-        return weight_tensor- self.lr*(self.momentum_one/(np.sqrt(self.momentum_two)+1e-8))
+        self.v_hat=self.momentum_one/(1-self.mu**self.k)
+        self.r_hat=self.momentum_two/(1-self.rho**self.k)
+        return weight_tensor- self.lr*(self.v_hat/(np.sqrt(self.r_hat)+1e-8))
 
 
 

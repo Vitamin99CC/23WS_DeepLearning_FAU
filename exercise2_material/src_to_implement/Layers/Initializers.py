@@ -13,7 +13,7 @@ class UniformRandom:
     
     def initialize(self, weights_shape, fan_in, fan_out):
 
-        return np.random.uniform(weights_shape)
+        return np.random.uniform(low=0,high=1,size=weights_shape)
 
 
 class Xavier:
