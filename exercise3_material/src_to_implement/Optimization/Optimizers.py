@@ -14,7 +14,7 @@ class Sgd(Optimizers):
         if self.regularizer is None :
          weight_tensor -= self.lr * gradient_tensor
         else:
-         weight_tensor -= (self.lr*self.regularizer.calculate_gradient(weight_tensor)) - (self.lr * gradient_tensor)
+         weight_tensor -= (self.lr*self.regularizer.calculate_gradient(weight_tensor)) + (self.lr * gradient_tensor)
         return weight_tensor
 
 
@@ -31,7 +31,7 @@ class SgdWithMomentum(Optimizers):
         if self.regularizer is None:
             return weight_tensor+self.velocity
         else:
-            return weight_tensor+self.velocity-self.regularizer.calculate_gradient(weight_tensor)
+            return weight_tensor + self.velocity - self.lr*self.regularizer.calculate_gradient(weight_tensor)
 
 
 class Adam(Optimizers):
@@ -55,7 +55,7 @@ class Adam(Optimizers):
         if self.regularizer is None:
             return weight_tensor- self.lr*(self.v_hat/(np.sqrt(self.r_hat)+1e-8))
         else:
-            return weight_tensor- self.regularizer.calculate_gradient(weight_tensor)-self.lr*(self.v_hat/(np.sqrt(self.r_hat)+1e-8))
+            return weight_tensor- self.lr * self.regularizer.calculate_gradient(weight_tensor)-self.lr*(self.v_hat/(np.sqrt(self.r_hat)+1e-8))
 
 ''''import numpy as np
 

@@ -31,8 +31,9 @@ class NeuralNetwork:
         self.reg_loss = 0
         for layer in self.layers:
             hidden_tensor = layer.forward(hidden_tensor)
-            if self.optimizer.regularizer is not None:
-                self.reg_loss += self.optimizer.regularizer.norm(layer.weights)
+            if layer.trainable:
+                if self.optimizer.regularizer is not None:
+                    self.reg_loss += self.optimizer.regularizer.norm(layer.weights)
         return self.loss_layer.forward(hidden_tensor, self.label_tensor) + self.reg_loss
         
     
