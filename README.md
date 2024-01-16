@@ -5,12 +5,15 @@ Exercise from 23WS Deep Learning, a course offered by Prof. Andreas Maier, Chair
 
 - ex0: 100/100
 - ex1: 100/100
+- ex2: 15/100
+- ex3: 100/100
 
 # Collaborators
 
 - ex0: Chen
 - ex1: Chen
 - ex2: Chen, Talha @talhaaaaaaaaa
+- ex3: Chen, Talha @talhaaaaaaaaa
 
 
 
