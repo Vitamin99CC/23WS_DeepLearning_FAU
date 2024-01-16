@@ -43,6 +43,7 @@ class FullyConnected(BaseLayer):
         return self._optimizer
     
     def backward(self, error_tensor):
+
         e_n_minus_1 = error_tensor.dot(self.weights[0:self.input_size, :].T) # ? x n*m+1
         self.gradient_weights = self.input_tensor.T.dot(error_tensor)
         if self._optimizer is not None:
@@ -65,6 +66,6 @@ class FullyConnected(BaseLayer):
     def initialize(self, weights_initializer, bias_initializer):
         self.weight_shape=[self.input_size, self.output_size]
         self.bias_shape=[1,self.output_size]
-        self.weights[0:self.input_size, :] =weights_initializer.initialize(self.weight_shape,self.input_size, self.output_size)
+        self.weights[0:self.input_size, :] = weights_initializer.initialize(self.weight_shape,self.input_size, self.output_size)
         self.weights[self.input_size, :] = bias_initializer.initialize(self.bias_shape,self.output_size, 1)
         # self.biases = bias_initializer.initialize(self.biases.shape[0], self.biases.shape[1])
