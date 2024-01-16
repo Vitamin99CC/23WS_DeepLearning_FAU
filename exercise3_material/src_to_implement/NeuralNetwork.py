@@ -50,6 +50,9 @@ class NeuralNetwork:
 
     def train(self, iterations):
         self.phase = "train"
+        for layer in self.layers:
+            if hasattr(layer, 'testing_phase'):
+                layer.testing_phase = False
         for i in range(iterations):
             self.loss.append(self.forward())
             self.backward()
@@ -59,5 +62,7 @@ class NeuralNetwork:
         self.phase = "test"
         hidden_tensor = input_tensor
         for layer in self.layers:
+            if hasattr(layer, 'testing_phase'):
+                layer.testing_phase = True
             hidden_tensor = layer.forward(hidden_tensor)
         return hidden_tensor

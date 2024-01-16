@@ -135,12 +135,12 @@ class RNN(Base.BaseLayer):
             e_n_minus_1[i, :] = e_x
 
             self.y_gradient_weights += self.fcy.gradient_weights
-
+            self.gradient_weights += self.fch.gradient_weights
             #if np.max(self.fch.gradient_weights) > 1e+5:
             #    print(self.fch.gradient_weights)
-            self.gw[cursor] += self.fch.gradient_weights
-            if np.max(self.gw[cursor]) > 1e+15:
-                cursor += 1
+            #self.gw[cursor] += self.fch.gradient_weights
+            #if np.max(self.gw[cursor]) > 1e+15:
+                #cursor += 1
                 #print(cursor)
 
 
@@ -155,10 +155,11 @@ class RNN(Base.BaseLayer):
         if self._optimizer is not None:
 #            if flag_overflow:
 #                self.fch.weights = self._optimizer.calculate_update(self.fch.weights, self.gradient_weights2)
-            for i in range(0, cursor+1):
-                self.fch.weights = self._optimizer.calculate_update(self.fch.weights, self.gw[i])
+            #for i in range(0, cursor+1):
+            #    self.fch.weights = self._optimizer.calculate_update(self.fch.weights, self.gw[i])
             self.fch.weights = self._optimizer.calculate_update(self.fch.weights, self.gradient_weights)
             self.fcy.weights = self._optimizer.calculate_update(self.fcy.weights, self.y_gradient_weights)
+
 
 
         return e_n_minus_1

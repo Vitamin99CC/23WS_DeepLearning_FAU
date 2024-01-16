@@ -13,6 +13,7 @@ class BatchNormalization(Base.BaseLayer):
         self.epsilon= 10**-20
         self.initialize()
         self._optimizer=None
+        self.testing_phase = False
     def initialize(self,weight_initializer=None,bias_initializer=None):
         self.gamma = np.ones(self.channels)
         self.beta = np.zeros(self.channels)
